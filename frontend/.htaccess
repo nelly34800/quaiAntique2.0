@@ -1,0 +1,9 @@
+# Activer la réécriture d'URL
+RewriteEngine On
+
+# Si le fichier ou dossier n'existe pas
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Réécrire vers index.html
+RewriteRule ^.*$ index.html [L,QSA]
