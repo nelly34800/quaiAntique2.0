@@ -11986,7 +11986,7 @@ html {
 }
 
 main {
-  margin-bottom: 230px;
+  margin-bottom: 300px;
 }
 
 footer.footer {
@@ -12047,4 +12047,19 @@ p {
   transition: all 0.3s;
   font-size: 26px;
   font-weight: bold;
+}
+
+.form-label {
+  color: #906427;
+}
+
+input.form-control::-moz-placeholder, textarea.form-control::-moz-placeholder {
+  color: lightgrey;
+  opacity: 1;
+}
+
+input.form-control::placeholder,
+textarea.form-control::placeholder {
+  color: lightgrey;
+  opacity: 1;
 }/*# sourceMappingURL=main.css.map */
