@@ -1,0 +1,54 @@
+<div class="hero-scene text-center text-white">
+  <div class="hero-scene-content">
+    <h1>Ma réservation</h1>
+  </div>
+</div>
+<div class="container p-4">
+  <form>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Nom</label>
+      <input disabled type="text" class="form-control" id="lastName" placeholder="Votre nom" />
+    </div>
+    <div class="mb-3">
+      <label for="firstName" class="form-label">Prénom</label>
+      <input disabled type="text" class="form-control" id="firstName" placeholder="Votre prénom" />
+    </div>
+    <div class="mb-3">
+      <label for="allergie" class="form-label">Allergie</label>
+      <input type="text" class="form-control" id="allergie" placeholder="Vos allergies (fruit de mer, arachides...)" />
+    </div>
+    <div class="mb-3">
+      <label for="date" class="form-label">Date</label>
+      <input type="date" class="form-control" id="date" name="date" />
+
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="service" id="midi" />
+      <label class="form-check-label" for="midi">Midi</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="service" id="soir" checked />
+      <label class="form-check-label" for="soir">Soir</label>
+    </div>
+    <div class="mb-3">
+        <label for="hour" class="form-label">Heure</label>
+    <select class="form-select" id="hour" name="hour">
+      <option >19h30</option>
+      <option >19h45</option>
+      <option >20h00</option>
+      <option >20h15</option>
+      <option >20h30</option>
+      <option >20h45</option>
+      <option >21h00</option>
+    </select>
+</div>
+    <div class="mb-3">
+      <label for="nbConvives" class="form-label">Nombre de convives</label>
+      <input type="number" class="form-control" id="nbConvives" name="nbConvives" placeholder="Combien êtes-vous ?" />
+    </div>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Réserver</button>
+      <button type="button" class="btn btn-danger">Annuler</button>
+    </div>
+  </form>
+</div>

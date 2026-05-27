@@ -1,0 +1,79 @@
+<div class="hero-scene text-center text-white">
+  <div class="hero-scene-content">
+    <h1>Vos réservations</h1>
+  </div>
+</div>
+<div class="container text-center p-3">
+  <a href="/reserve" class="btn btn-primary">Réserver</a>
+</div>
+<div class="container text-center allreservations">
+  <h1>Réservations en attente</h1>
+    <a href="#">
+    <span>12/05/2026</span> | 
+    <span>12:10</span> | 
+    <span>5 personnes</span>|
+    <span>Pas d'allergie</span>
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editionResaModal">Modifier</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteResaModal">Supprimer</button>
+  </a>
+</div>
+<div class="container text-center allreservations">
+  <h1>Réservations terminées</h1>
+  <a href="#">
+    <span>12/04/2026</span> | 
+    <span>12:10</span> | 
+    <span>5 personnes</span>|
+    <span>Pas d'allergie</span>
+  </a>
+  <a href="#">
+    <span>12/03/2026</span> | 
+    <span>12:10</span> | 
+    <span>5 personnes</span>|
+    <span>Pas d'allergie</span>
+  </a>
+
+  <!-- Modal edition-->
+<div class="modal fade" id="editionResaModal" tabindex="-1" aria-labelledby="editionResaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="editionResaModalLabel">Edition réservation</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="namePhotoInput" class="form-label">Réservation</label>
+            <input type="text" class="form-control" id="namePhotoInput" name="namePhotoInput" placeholder="12/04/2026 | 12:10 | 5 personnes | Pas d'allergie"/>
+          </div>
+          <div class="text-center">
+            <button type="button" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal suppression-->
+<div class="modal fade" id="deleteResaModal" tabindex="-1" aria-labelledby="deleteResaModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="deleteResaModalLabel">Êtes-vous sûr de vouloir supprimer cette réservation ?</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <p>"12/04/2026 | 12:10 | 5 personnes | Pas d'allergie"</p>
+          </div>
+          <div class="text-center">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

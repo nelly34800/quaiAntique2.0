@@ -7,7 +7,7 @@ html {
 }
 
 main {
-  margin-bottom: 300px;
+  margin-bottom: 250px;
 }
 
 footer.footer {
@@ -53,11 +53,12 @@ p {
 .image-card {
   position: relative;
   &:hover {
-    .titre-image {
+    .titre-image,
+    .action-image-buttons {
       opacity: 1;
-      img {
-        filter: brightness(0.3);
-      }
+    }
+    img {
+      filter: brightness(0.3);
     }
   }
 
@@ -72,8 +73,20 @@ p {
     transform: translate(-50%, -50%);
     opacity: 0;
     transition: all 0.3s;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: bold;
+  }
+
+.action-image-buttons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0;
+    transition: all 0.3s;
   }
 }
 
@@ -85,4 +98,16 @@ input.form-control::placeholder,
 textarea.form-control::placeholder {
   color: lightgrey;
   opacity: 1;
+}
+
+.allreservations {
+  a {
+    display: block;
+    color: $black;
+    padding: 10px;
+  } 
+}
+
+.colorPrim {
+  color: $primary;
 }

@@ -1,0 +1,106 @@
+<div class="hero-scene text-center text-white">
+  <div class="hero-scene-content">
+    <h1>Galerie</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="text-center pt-5">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionPhotoModal">Ajouter une photo</button>
+  </div>
+  <div class="row row-cols-2 row-cols-lg-3">
+    <div class="col p-3">
+      <div class="image-card text-white rounded">
+        <img src="../img/chef.jpg" class="w-100" alt="" />
+        <p class="titre-image">Le chef</p>
+        <div class="action-image-buttons">
+          <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editionPhotoModal"><i class="bi bi-pencil-square"></i></button>
+          <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#deletePhotoModal"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="col p-3">
+      <div class="image-card text-white">
+        <img src="../img/terrasse.jpg" class="rounded w-100" alt="" />
+        <p class="titre-image">Notre terasse</p>
+      </div>
+    </div>
+    <div class="col p-3">
+      <div class="image-card text-white">
+        <img src="../img/spaghetti.jpg" class="rounded w-100" alt="" />
+        <p class="titre-image">les pâtes</p>
+      </div>
+    </div>
+    <div class="col p-3">
+      <div class="image-card text-white">
+        <img src="../img/saumon.jpg" class="rounded w-100" alt="" />
+        <p class="titre-image">Nos poissons</p>
+      </div>
+    </div>
+    <div class="col p-3">
+      <div class="image-card text-white">
+        <img src="../img/table.jpg" class="rounded w-100" alt="" />
+        <p class="titre-image">soirée à thème</p>
+      </div>
+    </div>
+    <div class="col pt-3">
+      <div class="image-card text-white">
+        <img src="../img/vin.jpg" class="rounded w-100" alt="" />
+        <p class="titre-image">les vins</p>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-3">
+    <a href="/reserve" class="btn btn-primary">Réserver</a>
+  </div>
+</div>
+
+<!-- Modal edition-->
+<div class="modal fade" id="editionPhotoModal" tabindex="-1" aria-labelledby="editionPhotoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="editionPhotoModalLabel">Edition photo</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="namePhotoInput" class="form-label">Titre</label>
+            <input type="text" class="form-control" id="namePhotoInput" name="namePhotoInput" placeholder="lasagne à la bolognaise"/>
+          </div>
+          <div class="mb-3">
+            <label for="imageInput" class="form-label">Image</label>
+            <input type="file" class="form-control" id="imageInput" name="imageInput" />
+          </div>
+          <div class="text-center">
+            <button type="button" class="btn btn-primary">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal suppression-->
+<div class="modal fade" id="deletePhotoModal" tabindex="-1" aria-labelledby="deletePhotoModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="deletePhotoModalLabel">Êtes-vous sûr de vouloir supprimer cette photo ?</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <pre>Titre</pre>
+            <img src="../img/chef.jpg" class="rounded w-100" alt="" />
+          </div>
+          <div class="text-center">
+            <button type="button" class="btn btn-danger">Supprimer</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
