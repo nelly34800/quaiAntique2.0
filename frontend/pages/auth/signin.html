@@ -12,9 +12,12 @@
     <div class="mb-3">
       <label for="password" class="form-label">Mot de passe</label>
       <input type="password" class="form-control" id="password" name="password"/>
+      <div class="invalid-feedback">
+        le mail et le mot de passe ne correspondent pas
+      </div>
     </div>
     <div class="text-center">
-      <button type="submit" class="btn btn-primary">Se connecter</button>
+      <button type="button" class="btn btn-primary"id="signin">Se connecter</button>
     </div>
     <div class="text-center pt-3 pb-5">
       <a href="/signup">vous n'avez pas de compte ? Inscrivez-vous ici ! </a>

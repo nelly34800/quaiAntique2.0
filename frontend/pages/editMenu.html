@@ -1,0 +1,152 @@
+<div class="hero-scene text-center text-white">
+  <div class="hero-scene-content">
+    <h1>modifier la carte</h1>
+  </div>
+</div>
+<div class="container">
+  <div class="row row-cols-1 row-cols-lg-2">
+    <div class="col">
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><h3 class="colorPrim">Entrées :</h3></td>
+            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionEntreeModal">modifier les entrées</button></td>
+          </tr>
+          <tr>
+            <td><strong>Salade de chèvre chaud</strong></td>
+            <td>7€</td>
+          </tr>
+          <tr>
+            <td><strong>Coquille Saint Jacques</strong></td>
+            <td>9€</td>
+          </tr>
+          <tr>
+            <td><h3 class="colorPrim">Plats :</h3></td>
+            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionPlatModal">modifier les plats</button></td>
+          </tr>
+          <tr>
+            <td><strong>Gambas flambées au pastis</strong></td>
+            <td>22€</td>
+          </tr>
+          <tr>
+            <td><strong>Magret de canard</strong></td>
+            <td>22€</td>
+          </tr>
+          <tr>
+            <td><h3 class="colorPrim">Desserts :</h3></td>
+            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionDessertModal">modifier les desserts</button></td>
+          </tr>
+          <tr>
+            <td><strong>Tiramisu aux fraises</strong></td>
+            <td>7€</td>
+          </tr>
+          <tr>
+            <td><strong>Crème catalane</strong></td>
+            <td>7€</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col text-center">
+      <img
+        src="../img/plats.png"
+        alt="photo des plats"
+        class="img-fluid rounded shadow"
+      />
+    </div>
+  </div>
+</div>
+
+<!-- Modal edition Entrées-->
+<div class="modal fade" id="editionEntreeModal" tabindex="-1" aria-labelledby="editionEntreeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="editionEntreeModalLabel">Edition entrée</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="mb-3">
+                    <label for="descriptionEntreeInput" class="form-label">Titre</label>
+                    <input type="text" class="form-control" id="descriptionEntreeInput" placeholder="Salade de chèvre chaud"/>
+                </div>
+                <div class="mb-3">
+                    <label for="imageInput" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInput" />
+                </div>
+                <div class="mb-3">
+                    <label for="prixEntreeInput" class="form-label">Prix</label>
+                    <input type="text" class="form-control" id="prixEntreeInput" placeholder="7€" />
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal edition Plats-->
+<div class="modal fade" id="editionPlatModal" tabindex="-1" aria-labelledby="editionPlatModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="editionPlatModalLabel">Edition plat</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="mb-3">
+                    <label for="descriptionPlatInput" class="form-label">Titre</label>
+                    <input type="text" class="form-control" id="descriptionPlatInput" placeholder="Gambas flambées au pastis"/>
+                </div>
+                <div class="mb-3">
+                    <label for="imageInput" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInput" />
+                </div>
+                <div class="mb-3">
+                    <label for="prixPlatInput" class="form-label">Prix</label>
+                    <input type="text" class="form-control" id="prixPlatInput" placeholder="22€" />
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal edition Desserts-->
+<div class="modal fade" id="editionDessertModal" tabindex="-1" aria-labelledby="editionDessertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="editionDessertModalLabel">Edition dessert</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="mb-3">
+                    <label for="descriptionDessertInput" class="form-label">Titre</label>
+                    <input type="text" class="form-control" id="descriptionDessertInput" placeholder="Tiramisu aux fraises"/>
+                </div>
+                <div class="mb-3">
+                    <label for="imageInput" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInput" />
+                </div>
+                <div class="mb-3">
+                    <label for="prixDessertInput" class="form-label">Prix</label>
+                    <input type="text" class="form-control" id="prixDessertInput" placeholder="7€" />
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
