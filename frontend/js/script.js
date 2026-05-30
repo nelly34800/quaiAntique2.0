@@ -87,3 +87,10 @@ function showAndHideElementForRole(){
         }
     })
 }
+
+function sanitizeHTML(text){
+    //fonction pour éviter les failles XSS
+  const tempHTML = document.createElement('div');
+  tempHTML.textContent = text;
+  return tempHTML.innerHTML;
+}

@@ -9,8 +9,8 @@
       <table class="table">
         <tbody>
           <tr>
-            <td><h3 class="colorPrim">Entrées :</h3></td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionEntreeModal">modifier les entrées</button></td>
+            <th><h3 class="colorPrim">Entrées :</h3></th>
+            <th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionEntreeModal">modifier les entrées</button></th>
           </tr>
           <tr>
             <td><strong>Salade de chèvre chaud</strong></td>
@@ -21,8 +21,8 @@
             <td>9€</td>
           </tr>
           <tr>
-            <td><h3 class="colorPrim">Plats :</h3></td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionPlatModal">modifier les plats</button></td>
+            <th><h3 class="colorPrim">Plats :</h3></th>
+            <th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionPlatModal">modifier les plats</button></th>
           </tr>
           <tr>
             <td><strong>Gambas flambées au pastis</strong></td>
@@ -33,8 +33,8 @@
             <td>22€</td>
           </tr>
           <tr>
-            <td><h3 class="colorPrim">Desserts :</h3></td>
-            <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionDessertModal">modifier les desserts</button></td>
+            <th><h3 class="colorPrim">Desserts :</h3></th>
+            <th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionDessertModal">modifier les desserts</button></th>
           </tr>
           <tr>
             <td><strong>Tiramisu aux fraises</strong></td>
@@ -51,7 +51,7 @@
     <div class="col text-center">
       <img
         src="../img/plats.png"
-        alt="photo des plats"
+        alt="les plats"
         class="img-fluid rounded shadow"
       />
     </div>
@@ -73,8 +73,8 @@
                     <input type="text" class="form-control" id="descriptionEntreeInput" placeholder="Salade de chèvre chaud"/>
                 </div>
                 <div class="mb-3">
-                    <label for="imageInput" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="imageInput" />
+                    <label for="imageInputStarter" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInputStarter" />
                 </div>
                 <div class="mb-3">
                     <label for="prixEntreeInput" class="form-label">Prix</label>
@@ -100,16 +100,16 @@
             <div class="modal-body">
                 <form>
                 <div class="mb-3">
-                    <label for="descriptionPlatInput" class="form-label">Titre</label>
-                    <input type="text" class="form-control" id="descriptionPlatInput" placeholder="Gambas flambées au pastis"/>
+                    <label for="descriptionDishInput" class="form-label">Titre</label>
+                    <input type="text" class="form-control" id="descriptionDishInput" placeholder="Gambas flambées au pastis"/>
                 </div>
                 <div class="mb-3">
-                    <label for="imageInput" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="imageInput" />
+                    <label for="imageInputDish" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInputDish" />
                 </div>
                 <div class="mb-3">
-                    <label for="prixPlatInput" class="form-label">Prix</label>
-                    <input type="text" class="form-control" id="prixPlatInput" placeholder="22€" />
+                    <label for="priceDishInput" class="form-label">Prix</label>
+                    <input type="text" class="form-control" id="priceDishInput" placeholder="22€" />
                 </div>
                 </form>
             </div>
@@ -135,12 +135,12 @@
                     <input type="text" class="form-control" id="descriptionDessertInput" placeholder="Tiramisu aux fraises"/>
                 </div>
                 <div class="mb-3">
-                    <label for="imageInput" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="imageInput" />
+                    <label for="imageInputDessert" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInputDessert" />
                 </div>
                 <div class="mb-3">
-                    <label for="prixDessertInput" class="form-label">Prix</label>
-                    <input type="text" class="form-control" id="prixDessertInput" placeholder="7€" />
+                    <label for="priceDessertInput" class="form-label">Prix</label>
+                    <input type="text" class="form-control" id="priceDessertInput" placeholder="7€" />
                 </div>
                 </form>
             </div>
