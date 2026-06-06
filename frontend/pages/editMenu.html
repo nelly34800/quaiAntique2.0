@@ -5,7 +5,7 @@
 </div>
 <div class="container">
   <div class="row row-cols-1 row-cols-lg-2">
-    <div class="col">
+    <div class="col  pt-5">
       <table class="table">
         <tbody>
           <tr>
@@ -21,7 +21,7 @@
             <td>9€</td>
           </tr>
           <tr>
-            <th><h3 class="colorPrim">Plats :</h3></th>
+            <th><h3 class="colorPrim pt-5">Plats :</h3></th>
             <th><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editionPlatModal">modifier les plats</button></th>
           </tr>
           <tr>
@@ -46,14 +46,12 @@
           </tr>
         </tbody>
       </table>
+       <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addCategoryModal">ajouter une catégorie</button>
     </div>
 
-    <div class="col text-center">
-      <img
-        src="../img/plats.png"
-        alt="les plats"
-        class="img-fluid rounded shadow"
-      />
+    <div class="col text-center mt-5">
+      <img src="../img/plats.png" alt="les plats" class="img-fluid rounded shadow"/>
+      <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#editionPictureModal">modifier la photo de la carte</button>
     </div>
   </div>
 </div>
@@ -72,10 +70,7 @@
                     <label for="descriptionEntreeInput" class="form-label">Titre</label>
                     <input type="text" class="form-control" id="descriptionEntreeInput" placeholder="Salade de chèvre chaud"/>
                 </div>
-                <div class="mb-3">
-                    <label for="imageInputStarter" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="imageInputStarter" />
-                </div>
+    
                 <div class="mb-3">
                     <label for="prixEntreeInput" class="form-label">Prix</label>
                     <input type="text" class="form-control" id="prixEntreeInput" placeholder="7€" />
@@ -103,10 +98,7 @@
                     <label for="descriptionDishInput" class="form-label">Titre</label>
                     <input type="text" class="form-control" id="descriptionDishInput" placeholder="Gambas flambées au pastis"/>
                 </div>
-                <div class="mb-3">
-                    <label for="imageInputDish" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="imageInputDish" />
-                </div>
+                
                 <div class="mb-3">
                     <label for="priceDishInput" class="form-label">Prix</label>
                     <input type="text" class="form-control" id="priceDishInput" placeholder="22€" />
@@ -134,13 +126,56 @@
                     <label for="descriptionDessertInput" class="form-label">Titre</label>
                     <input type="text" class="form-control" id="descriptionDessertInput" placeholder="Tiramisu aux fraises"/>
                 </div>
-                <div class="mb-3">
-                    <label for="imageInputDessert" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="imageInputDessert" />
-                </div>
+               
                 <div class="mb-3">
                     <label for="priceDessertInput" class="form-label">Prix</label>
                     <input type="text" class="form-control" id="priceDessertInput" placeholder="7€" />
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal edition Catégories-->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="addCategoryModalLabel">Ajout catégorie</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="mb-3">
+                    <label for="descriptionCategoryInput" class="form-label">Catégorie</label>
+                    <input type="text" class="form-control" id="descriptionCategoryInput" placeholder="entrée"/>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal edition Photo-->
+<div class="modal fade" id="editionPictureModal" tabindex="-1" aria-labelledby="editionPictureModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="editionPictureModalLabel">Edition photo</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                 <div class="mb-3">
+                    <label for="imageInput" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="imageInput" />
                 </div>
                 </form>
             </div>

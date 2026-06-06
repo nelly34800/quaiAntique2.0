@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
 class Restaurant
@@ -14,27 +16,38 @@ class Restaurant
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['restaurant:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 32)]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
     private array $amOpeningTime = [];
 
     #[ORM\Column]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
     private array $pmOpeningTime = [];
 
     #[ORM\Column(type: Types::SMALLINT)]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
+    #[Assert\Positive]
     private ?int $maxGuest = null;
 
     #[ORM\Column]
+    #[Groups(['restaurant:read'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['restaurant:read'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**

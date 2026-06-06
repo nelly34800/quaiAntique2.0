@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\BookingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -12,24 +14,32 @@ class Booking
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['booking:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
+    #[Groups(['booking:read', 'booking:write'])]
+    #[Assert\Positive]
     private ?int $guestNumber = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['booking:read', 'booking:write'])]
     private ?\DateTime $orderDate = null;
 
     #[ORM\Column]
+    #[Groups(['booking:read', 'booking:write'])]
     private ?\DateTime $orderHour = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['booking:read', 'booking:write'])]
     private ?string $allergy = null;
 
     #[ORM\Column]
+    #[Groups(['booking:read'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['booking:read'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]

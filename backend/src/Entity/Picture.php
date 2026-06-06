@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\PictureRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
 class Picture
@@ -11,18 +14,29 @@ class Picture
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['picture:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['picture:read', 'picture:write'])]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column(length: 128)]
+    #[Groups(['picture:read', 'picture:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '/\.(jpg|jpeg|png|webp)$/i',
+        message: 'Le fichier doit être une image jpg, jpeg, png ou webp.'
+    )]
     private ?string $slug = null;
 
     #[ORM\Column]
+    #[Groups(['picture:read'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['picture:read'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'pictures')]

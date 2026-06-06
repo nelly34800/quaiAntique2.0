@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MenuRepository::class)]
 class Menu
@@ -14,32 +16,50 @@ class Menu
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['menu:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
+    #[Groups(['menu:read', 'menu:write'])]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['menu:read', 'menu:write'])]
+    #[Assert\NotBlank]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255)]
+    #[Groups(['menu:read', 'menu:write'])]
+    #[Assert\NotBlank]
+    #[Assert\Regex(
+        pattern: '/\.(jpg|jpeg|png|webp)$/i',
+        message: 'Le fichier doit être une image jpg, jpeg, png ou webp.'
+    )]
+    private ?string $image = null;
+
     #[ORM\Column(type: Types::SMALLINT)]
+    #[Groups(['menu:read', 'menu:write'])]
+    #[Assert\Positive]
     private ?int $price = null;
 
     #[ORM\Column]
+    #[Groups(['menu:read'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['menu:read'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
-     * @var Collection<int, Category>
+     * @var Collection<int, Food>
      */
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'menu')]
-    private Collection $categories;
+    #[ORM\ManyToMany(targetEntity: Food::class, inversedBy: 'menus')]
+    private Collection $foods;
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+        $this->foods = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,6 +87,18 @@ class Menu
     public function setDescription(string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+     public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
@@ -108,28 +140,25 @@ class Menu
     }
 
     /**
-     * @return Collection<int, Category>
+     * @return Collection<int, Food>
      */
-    public function getCategories(): Collection
+    public function getFoods(): Collection
     {
-        return $this->categories;
+        return $this->foods;
     }
 
-    public function addCategory(Category $category): static
+    public function addFood(Food $food): static
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->addMenu($this);
+        if (!$this->foods->contains($food)) {
+            $this->foods->add($food);
         }
 
         return $this;
     }
 
-    public function removeCategory(Category $category): static
+    public function removeFood(Food $food): static
     {
-        if ($this->categories->removeElement($category)) {
-            $category->removeMenu($this);
-        }
+        $this->foods->removeElement($food);
 
         return $this;
     }

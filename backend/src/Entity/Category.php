@@ -6,6 +6,8 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -13,33 +15,32 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['category:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
+    #[Groups(['category:read', 'category:write'])]
+    #[Assert\NotBlank]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Groups(['category:read'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['category:read'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    /**
-     * @var Collection<int, Menu>
-     */
-    #[ORM\ManyToMany(targetEntity: Menu::class, inversedBy: 'categories')]
-    private Collection $menu;
 
     /**
      * @var Collection<int, Food>
      */
-    #[ORM\ManyToMany(targetEntity: Food::class, inversedBy: 'categories')]
-    private Collection $food;
+    #[ORM\ManyToMany(targetEntity: Food::class, mappedBy: 'categories')]
+    private Collection $foods;
 
     public function __construct()
     {
-        $this->menu = new ArrayCollection();
-        $this->food = new ArrayCollection();
+        $this->foods = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -84,41 +85,17 @@ class Category
     }
 
     /**
-     * @return Collection<int, Menu>
-     */
-    public function getMenu(): Collection
-    {
-        return $this->menu;
-    }
-
-    public function addMenu(Menu $menu): static
-    {
-        if (!$this->menu->contains($menu)) {
-            $this->menu->add($menu);
-        }
-
-        return $this;
-    }
-
-    public function removeMenu(Menu $menu): static
-    {
-        $this->menu->removeElement($menu);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Food>
      */
-    public function getFood(): Collection
+    public function getFoods(): Collection
     {
-        return $this->food;
+        return $this->foods;
     }
 
     public function addFood(Food $food): static
     {
-        if (!$this->food->contains($food)) {
-            $this->food->add($food);
+        if (!$this->foods->contains($food)) {
+            $this->foods->add($food);
         }
 
         return $this;
@@ -126,7 +103,7 @@ class Category
 
     public function removeFood(Food $food): static
     {
-        $this->food->removeElement($food);
+        $this->foods->removeElement($food);
 
         return $this;
     }
