@@ -13,6 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use OpenApi\Attributes as OA;
 
 
 #[Route('/api/picture', name: 'app_api_picture_')]
@@ -27,6 +28,49 @@ class PictureController extends AbstractController
     ) {
     }
 
+    #[OA\Post(
+        path: '/api/picture',
+        summary: 'Ajouter un nouvelle image'
+    )]
+    #[OA\RequestBody(
+        required: true,
+        description: 'Données de l\'image à ajouterer',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'slug', 'createdAt', 'restaurantId'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'Image 1'
+                ),
+                new OA\Property(
+                    property: 'slug',
+                    type: 'string',
+                    example: 'image-1'
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                    property: 'restaurant',
+                    type: 'integer',
+                    example: 1
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'Image ajoutée avec succès',
+    )]
     #[Route(methods: ['POST'])]
     public function new(Request $request): JsonResponse
     {
@@ -59,6 +103,47 @@ class PictureController extends AbstractController
         return new JsonResponse($responseData, Response::HTTP_CREATED, ["Location" => $location], true);
     }
 
+    #[OA\Get(
+        path: '/api/picture',
+        summary: 'Afficher toutes les images'
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Images trouvées avec succès',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(
+                properties: [
+                    new OA\Property(
+                        property: 'id',
+                        type: 'integer',
+                        example: 1
+                    ),
+                    new OA\Property(
+                        property: 'title',
+                        type: 'string',
+                        example: 'Image 1'
+                    ),
+                    new OA\Property(
+                        property: 'slug',
+                        type: 'string',
+                        example: 'image-1'
+                    ),
+                    new OA\Property(
+                        property: 'createdAt',
+                        type: 'string',
+                        format: 'date-time',
+                        example: '2023-01-01T00:00:00Z'
+                    ),
+                    new OA\Property(
+                        property: 'restaurant',
+                        type: 'integer',
+                        example: 1
+                    )
+                ]
+            )
+        )
+    )]
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(): JsonResponse
     {
@@ -69,7 +154,56 @@ class PictureController extends AbstractController
       return new JsonResponse($responseData,Response::HTTP_OK,[],true);
     }
 
-
+    #[OA\Get(
+        path: '/api/picture/{id}',
+        summary: 'Afficher une image par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID de l\'image à afficher',
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Image trouvée avec succès',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'slug', 'createdAt', 'restaurantId'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'Image 1'
+                ),
+                new OA\Property(
+                    property: 'slug',
+                    type: 'string',
+                    example: 'image-1'
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                    property: 'restaurant',
+                    type: 'integer',
+                    example: 1
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Image non trouvée'
+    )]
     #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(int $id): JsonResponse
     {
@@ -82,6 +216,81 @@ class PictureController extends AbstractController
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
+    #[OA\Put(
+        path: '/api/picture/{id}',
+        summary: 'Modifier une image par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID de l\'image à modifier',
+        schema: new OA\Schema(type: 'integer')
+    )]
+     #[OA\RequestBody(
+        required: true,
+        description: 'Données de l\'image à modifier',
+        content: new OA\JsonContent(
+            required: ['title', 'slug', 'createdAt'],
+            properties: [
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'Image 1'
+                ),
+                new OA\Property(
+                    property: 'slug',
+                    type: 'string',
+                    example: 'image-1'
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Image modifiée avec succès',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'slug', 'createdAt', 'restaurantId'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'Image 1'
+                ),
+                new OA\Property(
+                    property: 'slug',
+                    type: 'string',
+                    example: 'image-1'
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                    property: 'restaurant',
+                    type: 'integer',
+                    example: 1
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Image non trouvée'
+    )]
     #[Route('/{id}', name: 'edit', methods: ['PUT'])]
     public function edit(int $id, Request $request): JsonResponse
     {
@@ -98,6 +307,25 @@ class PictureController extends AbstractController
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
+    #[OA\Delete(
+        path: '/api/picture/{id}',
+        summary: 'Supprimer une image par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID de l\'image à supprimer',
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Image supprimée avec succès'
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Image non trouvée'
+    )]
     #[Route('/{id}', name: 'delete', methods: ['DELETE'])]
     public function delete(int $id): JsonResponse
     {

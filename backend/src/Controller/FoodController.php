@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-
+use OpenApi\Attributes as OA;
 
  #[Route('/api/food', name: 'app_api_food_')]
 class FoodController extends AbstractController
@@ -27,6 +27,57 @@ class FoodController extends AbstractController
     ) {
     }
 
+    #[OA\Post(
+        path: '/api/food',
+        summary: 'Ajouter un nouveau plat'
+    )]
+    #[OA\RequestBody(
+        required: true,
+        description: 'Données du plat à ajouter',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'description', 'price', 'createdAt', 'categories'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                        property: 'title',
+                        type: 'string',
+                        example: 'Saumon à l\'oseille'
+                ),
+                new OA\Property(
+                    property: 'description',
+                    type: 'string',
+                    example: 'Saumon à l\'oseille avec son accompagnement de légumes de saison'
+                ),
+                new OA\Property(
+                        property: 'price',
+                        type: 'integer',
+                        example: 19
+                    ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                    ),
+                new OA\Property(
+                    property: 'categories',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'integer',
+                        example: 1
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'plat ajouté avec succès',
+    )]
     #[Route(methods: ['POST'])]
     public function new(Request $request): JsonResponse
     {
@@ -60,6 +111,65 @@ class FoodController extends AbstractController
         return new JsonResponse($responseData, Response::HTTP_CREATED, ["Location" => $location], true);
     }
 
+    #[OA\Get(
+        path: '/api/food',
+        summary: 'Afficher tous les plats'
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Plats trouvés avec succès',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(
+                properties: [
+                    new OA\Property(
+                        property: 'id',
+                        type: 'integer',
+                        example: 1
+                    ),
+                    new OA\Property(
+                        property: 'title',
+                        type: 'string',
+                        example: 'Saumon à l\'oseille'
+                    ),
+                    new OA\Property(
+                        property: 'description',
+                        type: 'string',
+                        example: 'Saumon à l\'oseille avec son accompagnement de légumes de saison'
+                    ),
+                    new OA\Property(
+                        property: 'price',
+                        type: 'integer',
+                        example: 19
+                    ),
+                    new OA\Property(
+                        property: 'createdAt',
+                        type: 'string',
+                        format: 'date-time',
+                        example: '2023-01-01T00:00:00Z'
+                    ),
+                    new OA\Property(
+                        property: 'categories',
+                        type: 'array',
+                        items: new OA\Items(
+                            properties: [
+                                new OA\Property(
+                                    property: 'id',
+                                    type: 'integer',
+                                    example: 1
+                                ),
+                                new OA\Property(
+                                    property: 'name',
+                                    type: 'string',
+                                    example: 'Plat principal'
+                                )
+                            ]
+                        )
+                    )
+                ]
+            )
+        )
+    )]
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(): JsonResponse
     {
@@ -70,7 +180,74 @@ class FoodController extends AbstractController
       return new JsonResponse($responseData,Response::HTTP_OK,[],true);
     }
 
-
+    #[OA\Get(
+        path: '/api/food/{id}',
+        summary: 'Afficher un plat par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID du plat à afficher',
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Plat trouvé avec succès',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'description', 'price', 'createdAt', 'categories'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'Saumon à l\'oseille'
+                ),
+                new OA\Property(
+                    property: 'description',
+                    type: 'string',
+                    example: 'Saumon à l\'oseille avec son accompagnement de légumes de saison'
+                ),
+                new OA\Property(
+                    property: 'price',
+                    type: 'integer',
+                    example: 19
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                    property: 'categories',
+                    type: 'array',
+                    items: new OA\Items(
+                        properties: [
+                            new OA\Property(
+                                property: 'id',
+                                type: 'integer',
+                                example: 1
+                            ),
+                            new OA\Property(
+                                property: 'name',
+                                type: 'string',
+                                example: 'Plat principal'
+                            )
+                        ]
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Plat non trouvé'
+    )]
     #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(int $id): JsonResponse
     {
@@ -83,6 +260,100 @@ class FoodController extends AbstractController
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
+    #[OA\Put(
+        path: '/api/food/{id}',
+        summary: 'Modifier un plat par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID du plat à modifier',
+        schema: new OA\Schema(type: 'integer')
+    )]
+     #[OA\RequestBody(
+        required: true,
+        description: 'Données du plat à modifier',
+        content: new OA\JsonContent(
+            required: ['title', 'description', 'price', 'createdAt', 'categories'],
+            properties: [
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'Saumon à l\'oseille'
+                ),
+                new OA\Property(
+                    property: 'description',
+                    type: 'string',
+                    example: 'Saumon à l\'oseille avec son accompagnement de légumes de saison'
+                ),
+                new OA\Property(
+                    property: 'price',
+                    type: 'integer',
+                    example: 19
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                property: 'categories',
+                type: 'array',
+                items: new OA\Items(
+                    type: 'integer'
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Plat modifié avec succès',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'description', 'price', 'createdAt', 'categories'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'Saumon à l\'oseille'
+                ),
+                new OA\Property(
+                    property: 'description',
+                    type: 'string',
+                    example: 'Saumon à l\'oseille avec son accompagnement de légumes de saison'
+                ),
+                new OA\Property(
+                    property: 'price',
+                    type: 'integer',
+                    example: 19
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                    property: 'categories',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'integer'
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Plat non trouvé'
+    )]
     #[Route('/{id}', name: 'edit', methods: ['PUT'])]
     public function edit(int $id, Request $request): JsonResponse
     {
@@ -99,6 +370,25 @@ class FoodController extends AbstractController
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
+    #[OA\Delete(
+        path: '/api/food/{id}',
+        summary: 'Supprimer un plat par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID du plat à supprimer',
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Plat supprimé avec succès'
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Plat non trouvé'
+    )]
     #[Route('/{id}', name: 'delete', methods: ['DELETE'])]
     public function delete(int $id): JsonResponse
     {

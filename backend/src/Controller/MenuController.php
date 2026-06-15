@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-
+use OpenApi\Attributes as OA;
 
  #[Route('/api/menu', name: 'app_api_menu_')]
 class MenuController extends AbstractController
@@ -27,6 +27,62 @@ class MenuController extends AbstractController
     ) {
     }
 
+    #[OA\Post(
+        path: '/api/menu',
+        summary: 'Créer un nouveau menu'
+    )]
+    #[OA\RequestBody(
+        required: true,
+        description: 'Données du menu à créer',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'description', 'image', 'price', 'createdAt', 'foods'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                        property: 'title',
+                        type: 'string',
+                        example: 'menu classique'
+                ),
+                new OA\Property(
+                        property: 'description',
+                        type: 'string',
+                        example: 'Plats gourmand avec des produits frais et de saison'
+                ),
+                new OA\Property(
+                        property: 'image',
+                        type: 'string',
+                        example: 'saumon.jpg'
+                ),
+                new OA\Property(
+                            property: 'price',
+                            type: 'integer',
+                            example: 19
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                    property: 'foods',
+                    type: 'array',
+                    items: new OA\Items(
+                            type: 'integer',
+                            example: 1
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 201,
+        description: 'menu créé avec succès',
+    )]
     #[Route(methods: ['POST'])]
     public function new(Request $request): JsonResponse
     {
@@ -60,6 +116,70 @@ class MenuController extends AbstractController
         return new JsonResponse($responseData, Response::HTTP_CREATED, ["Location" => $location], true);
     }
 
+    #[OA\Get(
+        path: '/api/menu',
+        summary: 'Afficher tous les menus'
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Menus trouvés avec succès',
+        content: new OA\JsonContent(
+            type: 'array',
+            items: new OA\Items(
+                properties: [
+                    new OA\Property(
+                        property: 'id',
+                        type: 'integer',
+                        example: 1
+                    ),
+                   new OA\Property(
+                        property: 'title',
+                        type: 'string',
+                        example: 'menu classique'
+                    ),
+                    new OA\Property(
+                        property: 'description',
+                        type: 'string',
+                        example: 'Plats gourmand avec des produits frais et de saison'
+                    ),
+                    new OA\Property(
+                        property: 'image',
+                        type: 'string',
+                        example: 'saumon.jpg'
+                    ),
+                    new OA\Property(
+                        property: 'price',
+                        type: 'integer',
+                        example: 19
+                    ),
+                    new OA\Property(
+                        property: 'createdAt',
+                        type: 'string',
+                        format: 'date-time',
+                        example: '2023-01-01T00:00:00Z'
+                    ),
+                    new OA\Property(
+                        property: 'foods',
+                        type: 'array',
+                        items: new OA\Items(
+                            properties: [
+                                new OA\Property(
+                                    property: 'id',
+                                    type: 'integer',
+                                    example: 1
+                                ),
+                                new OA\Property(
+                                    property: 'name',
+                                    type: 'string',
+                                    example: 'Saumon à l\'oseille'
+                                )
+                           ]
+                        )
+                    )
+                ]
+            )
+        )
+    )]
     #[Route('', name: 'index', methods: ['GET'])]
     public function index(): JsonResponse
     {
@@ -70,6 +190,79 @@ class MenuController extends AbstractController
       return new JsonResponse($responseData,Response::HTTP_OK,[],true);
     }
 
+    #[OA\Get(
+        path: '/api/menu/{id}',
+        summary: 'Afficher un menu par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID du menu à afficher',
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Response(
+        response: 200,
+        description: 'Menu trouvé avec succès',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'description', 'image', 'price', 'createdAt', 'foods'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                        property: 'title',
+                        type: 'string',
+                        example: 'menu classique'
+                ),
+                new OA\Property(
+                    property: 'description',
+                    type: 'string',
+                    example: 'Plats gourmand avec des produits frais et de saison'
+                ),
+                new OA\Property(
+                        property: 'image',
+                        type: 'string',
+                        example: 'saumon.jpg'
+                ),
+                new OA\Property(
+                    property: 'price',
+                    type: 'integer',
+                    example: 19
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                    property: 'foods',
+                    type: 'array',
+                    items: new OA\Items(
+                        properties: [
+                            new OA\Property(
+                                  property: 'id',
+                                  type: 'integer',
+                                  example: 1
+                              ),
+                            new OA\Property(
+                                property: 'name',
+                                type: 'string',
+                                example: 'Saumon à l\'oseille'
+                            )
+                        ]
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Menu non trouvé'
+    )]
     #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(int $id): JsonResponse
     {
@@ -82,6 +275,110 @@ class MenuController extends AbstractController
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
+    #[OA\Put(
+        path: '/api/menu/{id}',
+        summary: 'Modifier un menu par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID du menu à modifier',
+        schema: new OA\Schema(type: 'integer')
+    )]
+     #[OA\RequestBody(
+        required: true,
+        description: 'Données du menu à modifier',
+        content: new OA\JsonContent(
+            required: ['title', 'description', 'image', 'price', 'createdAt', 'foods'],
+            properties: [
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'menu classique'
+                ),
+                new OA\Property(
+                    property: 'description',
+                    type: 'string',
+                    example: 'Plats gourmand avec des produits frais et de saison'
+                ),
+                new OA\Property(
+                    property: 'image',
+                    type: 'string',
+                    example: 'saumon.jpg'
+                ),
+                new OA\Property(
+                    property: 'price',
+                    type: 'integer',
+                    example: 19
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                    ),
+                new OA\Property(
+                    property: 'foods',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'integer'
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Menu modifié avec succès',
+        content: new OA\JsonContent(
+            required: ['id', 'title', 'description', 'image', 'price', 'createdAt', 'foods'],
+            properties: [
+                new OA\Property(
+                    property: 'id',
+                    type: 'integer',
+                    example: 1
+                ),
+                new OA\Property(
+                    property: 'title',
+                    type: 'string',
+                    example: 'menu classique'
+                ),
+                new OA\Property(
+                    property: 'description',
+                    type: 'string',
+                    example: 'Plats gourmand avec des produits frais et de saison'
+                ),
+                new OA\Property(
+                    property: 'image',
+                    type: 'string',
+                    example: 'saumon.jpg'
+                ),
+                new OA\Property(
+                    property: 'price',
+                    type: 'integer',
+                    example: 19
+                ),
+                new OA\Property(
+                    property: 'createdAt',
+                    type: 'string',
+                    format: 'date-time',
+                    example: '2023-01-01T00:00:00Z'
+                ),
+                new OA\Property(
+                    property: 'foods',
+                    type: 'array',
+                    items: new OA\Items(
+                        type: 'integer'
+                    )
+                )
+            ]
+        )
+    )]
+    #[OA\Response(
+        response: 404,
+        description: 'Menu non trouvé'
+    )]
     #[Route('/{id}', name: 'edit', methods: ['PUT'])]
     public function edit(int $id, Request $request): JsonResponse
     {
@@ -98,6 +395,26 @@ class MenuController extends AbstractController
         return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
 
+    #[OA\Delete(
+        path: '/api/menu/{id}',
+        summary: 'Supprimer un menu par son ID'
+    )]
+    #[OA\Parameter(
+        name: 'id',
+        in: 'path',
+        required: true,
+        description: 'ID du menu à supprimer',
+        schema: new OA\Schema(type: 'integer')
+    )]
+    #[OA\Response(
+        response: 204,
+        description: 'Menu supprimé avec succès'
+    )]
+    
+    #[OA\Response(
+        response: 404,
+        description: 'Menu non trouvé'
+    )]
     #[Route('/{id}', name: 'delete', methods: ['DELETE'])]
     public function delete(int $id): JsonResponse
     {
