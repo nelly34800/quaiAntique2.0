@@ -33,6 +33,7 @@ const LoadContentPage = async () => {
     } 
   else{
     const roleUser = getRole();
+
     if(!allRolesArray.includes(roleUser)){
       window.location.replace("/");
       }

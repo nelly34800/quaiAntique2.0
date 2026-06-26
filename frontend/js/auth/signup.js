@@ -4,7 +4,10 @@ const firstName = document.getElementById("firstName");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirmPassword");
-const btnValidation = document.getElementById("validation-inscription");
+const allergy = document.getElementById("allergy");
+const guestNumber = document.getElementById("guestNumber");
+const btnValidation = document.getElementById("validationInscription");
+const registrationForm = document.getElementById("registrationForm");
 
 //écoute des événements
 lastName.addEventListener("keyup", validateForm);
@@ -12,6 +15,8 @@ firstName.addEventListener("keyup", validateForm);
 email.addEventListener("keyup", validateForm);
 password.addEventListener("keyup", validateForm);
 confirmPassword.addEventListener("keyup", validateForm);
+
+btnValidation.addEventListener("click", registerUser);
 
 //fonction permettant de valider le formulaire
 function validateForm(){
@@ -93,3 +98,53 @@ function validateRequired(input){
         return false;
     }
 }
+
+function registerUser(){
+    // Crée un nouvel objet FormData à partir du formulaire contenu dans la variable "registrationForm"
+    let dataForm = new FormData(registrationForm);
+
+    // Crée un nouvel objet Headers pour définir les en-têtes de la requête HTTP
+    let myHeaders = new Headers();
+    // Ajoute l'en-tête "Content-Type" avec la valeur "application/json"
+    myHeaders.append("Content-Type", "application/json");
+
+    // Convertit les données du formulaire en une chaîne JSON
+    let raw = JSON.stringify({
+        firstName: dataForm.get("firstName"),
+        lastName: dataForm.get("lastName"),
+        email: dataForm.get("email"),
+        password: dataForm.get("password"),
+        allergy:  dataForm.get("allergy"),
+        guestNumber: Number(dataForm.get("guestNumber"))
+    });
+
+    // Configure les options de la requête HTTP
+    let requestOptions = {
+        // Méthode de la requête : "POST" pour envoyer des données au serveur
+        method: 'POST',
+        // Définit les en-têtes de la requête en utilisant l'objet Headers créé précédemment
+        headers: myHeaders,
+        // Corps de la requête : les données JSON converties en chaîne
+        body: raw,
+        // Redirection à suivre en cas de besoin ("follow" suit automatiquement les redirections)
+        redirect: 'follow'
+    };
+
+    fetch(apiUrl+"registration", requestOptions)
+    .then(async response => {
+        if (!response.ok) {
+            const error = await response.text();
+            throw new Error(error);
+        }
+
+        return response.json();
+    })
+    .then(result => {
+        alert("Bravo " + dataForm.get("firstName") + " ! L'inscription a fonctionné !");
+        document.location.href = "/signin";
+    })
+    .catch(error => {
+        console.error(error);
+        alert("Erreur lors de l'inscription");
+    });
+  }
