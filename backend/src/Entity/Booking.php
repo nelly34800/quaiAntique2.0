@@ -24,10 +24,12 @@ class Booking
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['booking:read', 'booking:write'])]
+    #[Assert\NotBlank]
     private ?\DateTime $orderDate = null;
 
     #[ORM\Column]
     #[Groups(['booking:read', 'booking:write'])]
+    #[Assert\NotBlank]
     private ?\DateTime $orderHour = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -48,6 +50,7 @@ class Booking
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['booking:read'])]
     private ?User $user = null;
 
     public function getId(): ?int
@@ -141,7 +144,7 @@ class Booking
 
     public function getUser(): ?User
     {
-        return $this->restaurant;
+        return $this->user;
     }
 
     public function setUser(?User $user): static

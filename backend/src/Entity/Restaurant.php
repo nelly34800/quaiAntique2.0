@@ -29,13 +29,35 @@ class Restaurant
     #[Assert\NotBlank]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 32)]
     #[Groups(['restaurant:read', 'restaurant:write'])]
-    private array $amOpeningTime = [];
+    #[Assert\NotBlank]
+    private ?string $openingDay = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 32)]
     #[Groups(['restaurant:read', 'restaurant:write'])]
-    private array $pmOpeningTime = [];
+    #[Assert\NotBlank]
+    private ?string $closingDay = null;
+
+    #[ORM\Column(length: 32)]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
+    #[Assert\NotBlank]
+    private ?string $amOpeningTime = null;
+
+    #[ORM\Column(length: 32)]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
+    #[Assert\NotBlank]
+    private ?string $pmOpeningTime = null;
+
+    #[ORM\Column(length: 32)]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
+    #[Assert\NotBlank]
+    private ?string $amClosingTime = null;
+
+    #[ORM\Column(length: 32)]
+    #[Groups(['restaurant:read', 'restaurant:write'])]
+    #[Assert\NotBlank]
+    private ?string $pmClosingTime = null;
 
     #[ORM\Column(type: Types::SMALLINT)]
     #[Groups(['restaurant:read', 'restaurant:write'])]
@@ -97,26 +119,74 @@ class Restaurant
         return $this;
     }
 
-    public function getAmOpeningTime(): array
+    public function getOpeningDay(): ?string
+    {
+        return $this->openingDay;
+    }
+
+    public function setOpeningDay(string $openingDay): static
+    {
+        $this->openingDay = $openingDay;
+
+        return $this;
+    }
+
+    public function getClosingDay(): ?string
+    {
+        return $this->closingDay;
+    }
+
+    public function setClosingDay(string $closingDay): static
+    {
+        $this->closingDay = $closingDay;
+
+        return $this;
+    }
+
+    public function getAmOpeningTime(): ?string
     {
         return $this->amOpeningTime;
     }
 
-    public function setAmOpeningTime(array $amOpeningTime): static
+    public function setAmOpeningTime(string $amOpeningTime): static
     {
         $this->amOpeningTime = $amOpeningTime;
 
         return $this;
     }
 
-    public function getPmOpeningTime(): array
+    public function getPmOpeningTime(): ?string
     {
         return $this->pmOpeningTime;
     }
 
-    public function setPmOpeningTime(array $pmOpeningTime): static
+    public function setPmOpeningTime(string $pmOpeningTime): static
     {
         $this->pmOpeningTime = $pmOpeningTime;
+
+        return $this;
+    }
+
+    public function getAmClosingTime(): ?string
+    {
+        return $this->amClosingTime;
+    }
+
+    public function setAmClosingTime(string $amClosingTime): static
+    {
+        $this->amClosingTime = $amClosingTime;
+
+        return $this;
+    }
+
+    public function getPmClosingTime(): ?string
+    {
+        return $this->pmClosingTime;
+    }
+
+    public function setPmClosingTime(string $pmClosingTime): static
+    {
+        $this->pmClosingTime = $pmClosingTime;
 
         return $this;
     }

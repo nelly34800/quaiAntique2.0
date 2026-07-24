@@ -35,7 +35,7 @@ class MenuController extends AbstractController
         required: true,
         description: 'Données du menu à créer',
         content: new OA\JsonContent(
-            required: ['id', 'title', 'description', 'image', 'price', 'createdAt', 'foods'],
+            required: ['id', 'title', 'description', 'image', 'createdAt', 'foods'],
             properties: [
                 new OA\Property(
                     property: 'id',
@@ -58,11 +58,6 @@ class MenuController extends AbstractController
                         example: 'saumon.jpg'
                 ),
                 new OA\Property(
-                            property: 'price',
-                            type: 'integer',
-                            example: 19
-                ),
-                new OA\Property(
                     property: 'createdAt',
                     type: 'string',
                     format: 'date-time',
@@ -81,7 +76,7 @@ class MenuController extends AbstractController
     )]
     #[OA\Response(
         response: 201,
-        description: 'menu créé avec succès',
+        description: 'carte créé avec succès',
     )]
     #[Route(methods: ['POST'])]
     public function new(Request $request): JsonResponse
@@ -148,11 +143,6 @@ class MenuController extends AbstractController
                         example: 'saumon.jpg'
                     ),
                     new OA\Property(
-                        property: 'price',
-                        type: 'integer',
-                        example: 19
-                    ),
-                    new OA\Property(
                         property: 'createdAt',
                         type: 'string',
                         format: 'date-time',
@@ -205,7 +195,7 @@ class MenuController extends AbstractController
         response: 200,
         description: 'Menu trouvé avec succès',
         content: new OA\JsonContent(
-            required: ['id', 'title', 'description', 'image', 'price', 'createdAt', 'foods'],
+            required: ['id', 'title', 'description', 'image', 'createdAt', 'foods'],
             properties: [
                 new OA\Property(
                     property: 'id',
@@ -226,11 +216,6 @@ class MenuController extends AbstractController
                         property: 'image',
                         type: 'string',
                         example: 'saumon.jpg'
-                ),
-                new OA\Property(
-                    property: 'price',
-                    type: 'integer',
-                    example: 19
                 ),
                 new OA\Property(
                     property: 'createdAt',
@@ -290,7 +275,7 @@ class MenuController extends AbstractController
         required: true,
         description: 'Données du menu à modifier',
         content: new OA\JsonContent(
-            required: ['title', 'description', 'image', 'price', 'createdAt', 'foods'],
+            required: ['title', 'description', 'image', 'createdAt', 'foods'],
             properties: [
                 new OA\Property(
                     property: 'title',
@@ -306,11 +291,6 @@ class MenuController extends AbstractController
                     property: 'image',
                     type: 'string',
                     example: 'saumon.jpg'
-                ),
-                new OA\Property(
-                    property: 'price',
-                    type: 'integer',
-                    example: 19
                 ),
                 new OA\Property(
                     property: 'createdAt',
@@ -332,7 +312,7 @@ class MenuController extends AbstractController
         response: 204,
         description: 'Menu modifié avec succès',
         content: new OA\JsonContent(
-            required: ['id', 'title', 'description', 'image', 'price', 'createdAt', 'foods'],
+            required: ['id', 'title', 'description', 'image','createdAt', 'foods'],
             properties: [
                 new OA\Property(
                     property: 'id',
@@ -353,11 +333,6 @@ class MenuController extends AbstractController
                     property: 'image',
                     type: 'string',
                     example: 'saumon.jpg'
-                ),
-                new OA\Property(
-                    property: 'price',
-                    type: 'integer',
-                    example: 19
                 ),
                 new OA\Property(
                     property: 'createdAt',

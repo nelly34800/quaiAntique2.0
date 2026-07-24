@@ -1,0 +1,34 @@
+<div class="container p-4">
+  <h1 class="text-center">Ajouter un plat</h1>
+  <form>
+    <div class="mb-3">
+      <label for="title" class="form-label">Nom du plat</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="ex : salade de chèvre chaud"/>
+      <div class="invalid-feedback">
+        Le nom du plat est requis
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input type="text" class="form-control" id="description" name="description" placeholder="ex : pelardon de chèvre chaud sur son toast accompagné de salade, cernaux de noix et sa vinaigrette aux fines herbes"/>
+      <div class="invalid-feedback">
+        La description est requise
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">prix</label>
+      <input type="number"  step="1" class="form-control" id="price" name="price" placeholder="ex : 12 €"/>
+      <div class="invalid-feedback">
+        Le prix du plat est requis
+      </div>
+    </div>
+    <div id="categories-container" class="mb-3">
+      <label class="bgc-secondary">Catégories :</label>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary" id="validationFood" disabled>Valider</button>
+        <a href="/food" class="btn btn-dark">Retour</a>
+      </div>
+  </form>
+</div>

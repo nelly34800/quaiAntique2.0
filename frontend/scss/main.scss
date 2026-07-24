@@ -111,3 +111,12 @@ textarea.form-control::placeholder {
 .colorPrim {
   color: $primary;
 }
+
+.container-admin {
+  text-align: center;
+}
+
+.thead-admin {
+    --bs-table-bg: #{$primary};
+    --bs-table-color: white;
+}

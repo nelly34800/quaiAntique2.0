@@ -22,11 +22,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 64)]
-    #[Groups(['user:read', 'user:write'])]
+    #[Groups(['user:read', 'booking:read', 'user:write'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 64)]
-    #[Groups(['user:read', 'user:write'])]
+    #[Groups(['user:read', 'booking:read', 'user:write'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 180)]

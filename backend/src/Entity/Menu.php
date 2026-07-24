@@ -38,11 +38,6 @@ class Menu
     )]
     private ?string $image = null;
 
-    #[ORM\Column(type: Types::SMALLINT)]
-    #[Groups(['menu:read', 'menu:write'])]
-    #[Assert\Positive]
-    private ?int $price = null;
-
     #[ORM\Column]
     #[Groups(['menu:read'])]
     private ?\DateTimeImmutable $createdAt = null;
@@ -99,18 +94,6 @@ class Menu
     public function setImage(string $image): static
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): static
-    {
-        $this->price = $price;
 
         return $this;
     }

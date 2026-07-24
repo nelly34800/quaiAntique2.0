@@ -33,13 +33,8 @@ class RestaurantController extends AbstractController
         required: true,
         description: 'Données du restaurant à créer',
         content: new OA\JsonContent(
-            required: ['id', 'name', 'description', 'amOpeningTime', 'pmOpeningTime', 'maxGuest', 'createdAt'],
+            required: ['name', 'description', 'openingDay', 'closingDay', 'amOpeningTime', 'pmOpeningTime', 'amClosingTime', 'pmClosingTime', 'maxGuest', 'createdAt'],
             properties: [
-                new OA\Property(
-                    property: 'id',
-                    type: 'integer',
-                    example: 4
-                ),
                 new OA\Property(
                     property: 'name',
                     type: 'string',
@@ -51,16 +46,34 @@ class RestaurantController extends AbstractController
                     example: 'Restaurant du chef Arnaud Michant'
                 ),
                 new OA\Property(
+                    property: 'openingDay',
+                    type: 'string',
+                    example: 'mardi'
+                ),
+                new OA\Property(
+                    property: 'closingDay',
+                    type: 'string',
+                    example: 'dimanche'
+                ),
+                 new OA\Property(
                     property: 'amOpeningTime',
-                    type: 'array',
-                    items: new OA\Items(type: 'string', 
-                    example: 'du mardi au dimanche')
+                    type: 'string',
+                    example: '12h00'
                 ),
                 new OA\Property(
                     property: 'pmOpeningTime',
-                    type: 'array',
-                    items: new OA\Items(type: 'string', 
-                    example: '12h00 - 14h00 et 18h00 - 23h00')
+                    type: 'string',
+                    example: '18h00'
+                ),
+                 new OA\Property(
+                    property: 'amClosingTime',
+                    type: 'string',
+                    example: '14h00'
+                ),
+                new OA\Property(
+                    property: 'pmClosingTime',
+                    type: 'string',
+                    example: '23h00'
                 ),
                 new OA\Property(
                     property: 'maxGuest',
@@ -125,18 +138,36 @@ class RestaurantController extends AbstractController
                         type: 'string',
                         example: 'description du restaurant'
                     ),
-                    new OA\Property(
-                        property: 'amOpeningTime',
-                        type: 'array',
-                        items: new OA\Items(type: 'string', 
-                        example: 'du mardi au dimanche')
-                    ),
-                    new OA\Property(
-                        property: 'pmOpeningTime',
-                        type: 'array',
-                        items: new OA\Items(type: 'string', 
-                        example: '12h00 - 14h00 et 18h00 - 23h00')
-                    ),
+                     new OA\Property(
+                    property: 'openingDay',
+                    type: 'string',
+                    example: 'mardi'
+                ),
+                new OA\Property(
+                    property: 'closingDay',
+                    type: 'string',
+                    example: 'dimanche'
+                ),
+                 new OA\Property(
+                    property: 'amOpeningTime',
+                    type: 'string',
+                    example: '12h00'
+                ),
+                new OA\Property(
+                    property: 'pmOpeningTime',
+                    type: 'string',
+                    example: '18h00'
+                ),
+                 new OA\Property(
+                    property: 'amClosingTime',
+                    type: 'string',
+                    example: '14h00'
+                ),
+                new OA\Property(
+                    property: 'pmClosingTime',
+                    type: 'string',
+                    example: '23h00'
+                ),
                     new OA\Property(
                         property: 'maxGuest',
                         type: 'integer',
@@ -177,7 +208,7 @@ class RestaurantController extends AbstractController
         response: 200,
         description: 'Restaurant trouvé avec succès',
         content: new OA\JsonContent(
-            required: ['id', 'name', 'description', 'amOpeningTime', 'pmOpeningTime', 'maxGuest', 'createdAt'],
+            required: ['id', 'name', 'description', 'openingDay', 'closingDay', 'amOpeningTime', 'pmOpeningTime', 'amClosingTime', 'pmClosingTime', 'maxGuest', 'createdAt'],
             properties: [
                 new OA\Property(
                     property: 'id',
@@ -194,17 +225,35 @@ class RestaurantController extends AbstractController
                     type: 'string',
                     example: 'description du restaurant'
                 ),
+                 new OA\Property(
+                    property: 'openingDay',
+                    type: 'string',
+                    example: 'mardi'
+                ),
                 new OA\Property(
+                    property: 'closingDay',
+                    type: 'string',
+                    example: 'dimanche'
+                ),
+                 new OA\Property(
                     property: 'amOpeningTime',
-                    type: 'array',
-                    items: new OA\Items(type: 'string', 
-                    example: 'du mardi au dimanche')
+                    type: 'string',
+                    example: '12h00'
                 ),
                 new OA\Property(
                     property: 'pmOpeningTime',
-                    type: 'array',
-                    items: new OA\Items(type: 'string', 
-                    example: '12h00 - 14h00 et 18h00 - 23h00')
+                    type: 'string',
+                    example: '18h00'
+                ),
+                 new OA\Property(
+                    property: 'amClosingTime',
+                    type: 'string',
+                    example: '14h00'
+                ),
+                new OA\Property(
+                    property: 'pmClosingTime',
+                    type: 'string',
+                    example: '23h00'
                 ),
                 new OA\Property(
                     property: 'maxGuest',
@@ -251,7 +300,7 @@ class RestaurantController extends AbstractController
         required: true,
         description: 'Données du restaurant à modifier',
         content: new OA\JsonContent(
-            required: ['name', 'description', 'amOpeningTime', 'pmOpeningTime', 'maxGuest', 'createdAt'],
+            required: ['name', 'description', 'openingDay', 'closingDay', 'amOpeningTime', 'pmOpeningTime', 'amClosingTime', 'pmClosingTime', 'maxGuest', 'createdAt'],
             properties: [
                 new OA\Property(
                     property: 'name',
@@ -264,16 +313,34 @@ class RestaurantController extends AbstractController
                     example: 'Restaurant du chef Arnaud Michant'
                 ),
                 new OA\Property(
+                    property: 'openingDay',
+                    type: 'string',
+                    example: 'mardi'
+                ),
+                new OA\Property(
+                    property: 'closingDay',
+                    type: 'string',
+                    example: 'dimanche'
+                ),
+                 new OA\Property(
                     property: 'amOpeningTime',
-                    type: 'array',
-                    items: new OA\Items(type: 'string', 
-                    example: 'du mardi au dimanche')
+                    type: 'string',
+                    example: '12h00'
                 ),
                 new OA\Property(
                     property: 'pmOpeningTime',
-                    type: 'array',
-                    items: new OA\Items(type: 'string', 
-                    example: '12h00 - 14h00 et 18h00 - 23h00')
+                    type: 'string',
+                    example: '18h00'
+                ),
+                 new OA\Property(
+                    property: 'amClosingTime',
+                    type: 'string',
+                    example: '14h00'
+                ),
+                new OA\Property(
+                    property: 'pmClosingTime',
+                    type: 'string',
+                    example: '23h00'
                 ),
                 new OA\Property(
                     property: 'maxGuest',
@@ -293,7 +360,7 @@ class RestaurantController extends AbstractController
         response: 204,
         description: 'Restaurant modifié avec succès',
         content: new OA\JsonContent(
-            required: ['id', 'name', 'description', 'amOpeningTime', 'pmOpeningTime', 'maxGuest', 'createdAt'],
+            required: ['id', 'name', 'description', 'openingDay', 'closingDay', 'amOpeningTime', 'pmOpeningTime', 'amClosingTime', 'pmClosingTime', 'maxGuest', 'createdAt'],
             properties: [
                 new OA\Property(
                     property: 'id',
@@ -311,16 +378,34 @@ class RestaurantController extends AbstractController
                     example: 'description du restaurant'
                 ),
                 new OA\Property(
+                    property: 'openingDay',
+                    type: 'string',
+                    example: 'mardi'
+                ),
+                new OA\Property(
+                    property: 'closingDay',
+                    type: 'string',
+                    example: 'dimanche'
+                ),
+                 new OA\Property(
                     property: 'amOpeningTime',
-                    type: 'array',
-                    items: new OA\Items(type: 'string', 
-                    example: 'du mardi au dimanche')
+                    type: 'string',
+                    example: '12h00'
                 ),
                 new OA\Property(
                     property: 'pmOpeningTime',
-                    type: 'array',
-                    items: new OA\Items(type: 'string', 
-                    example: '12h00 - 14h00 et 18h00 - 23h00')
+                    type: 'string',
+                    example: '18h00'
+                ),
+                 new OA\Property(
+                    property: 'amClosingTime',
+                    type: 'string',
+                    example: '14h00'
+                ),
+                new OA\Property(
+                    property: 'pmClosingTime',
+                    type: 'string',
+                    example: '23h00'
                 ),
                 new OA\Property(
                     property: 'maxGuest',

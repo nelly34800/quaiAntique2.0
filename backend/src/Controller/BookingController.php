@@ -275,10 +275,9 @@ class BookingController extends AbstractController
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
 
-        return new JsonResponse([
-            'id' => $booking->getId(),
-            'guestNumber' => $booking->getGuestNumber()
-        ]);
+        $responseData = $this->serializer->serialize($booking, 'json', ['groups' => ['booking:read']]);
+
+      return new JsonResponse($responseData,Response::HTTP_OK,[],true);
     }
 
     #[OA\Put(

@@ -12084,4 +12084,13 @@ textarea.form-control::placeholder {
 
 .colorPrim {
   color: #906427;
+}
+
+.container-admin {
+  text-align: center;
+}
+
+.thead-admin {
+  --bs-table-bg: #906427;
+  --bs-table-color: white;
 }/*# sourceMappingURL=main.css.map */

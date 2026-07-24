@@ -1,0 +1,63 @@
+<div class="container-admin">
+  <h1 class="text-lef">Espace administrateur</h1>
+  <div class="row">
+    <div class="col-12 col-lg-3">
+      <ul>
+        <li><a href="/food">les plats</a></li>
+        <li><a href="/categories">les catégories</a></li>
+      </ul>
+    </div>
+    <div class="col-12 col-lg-9">
+      <h2>Les résérvations</h2>
+      <div class="bookingsFilters mb-3">
+        <h3>Filtres : </h3>
+        <fieldset>
+          <label for="filterName">Filtrer par date : </label>
+          <input type="text" id="filterName" name="filterName" placeholder="Rechercher par nom" />
+        </fieldset>
+        <fieldset>Filtrer par date :
+          <label for="filterStartDate">Date de début: </label>
+          <input type="date" id="filterStartDate" name="filterStartDate"/>
+
+          <label for="filterEndDate">Date de fin: </label>
+          <input type="date" id="filterEndDate" name="filterEndDate"/>
+        </fieldset>
+      </div>
+      <!--version desktop-->
+      <div class="d-none d-md-block">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Date</th>
+              <th>Heure</th>
+              <th>allergie</th>
+              <th>nombre de convives</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--version mobile-->
+      <div class="d-md-none" id="mobile-container">
+        <div class="card mb-3">
+          <div class="card-body bgc-secondary text-center">
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
